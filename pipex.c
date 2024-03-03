@@ -6,11 +6,32 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/02/28 17:50:59 by lucas            ###   ########.fr       */
+/*   Updated: 2024/03/03 07:57:46 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	child_process(char **argv, char **envp, int fd[2])
+{
+	dup2(fd[1], STDOUT_FILENO); // STDOUT to pipe
+	close(fd[0]);
+
+	execve("/bin/sh", argv, envp);
+	perror("execve");
+	exit(EXIT_FAILURE);
+}
+
+void	parent_process(char **argv, char **envp, int fd[2])
+{
+	dup2(fd[0], STDIN_FILENO); // STDIN to pipe
+	close(fd[1]);
+
+	execve("/bin/sh", argv, envp);
+	perror("execve");
+	exit(EXIT_FAILURE);
+}
+
 
 int	main(int argc, char **argv, char **envp)
 {
