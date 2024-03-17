@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/03/17 16:44:54 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/17 16:52:55 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	else
 	{
+		//replace by arg_error(multpipe) if you do bonus
 		ft_putstr_fd("\033[31mError: Bad arguments\n\e[0m", 2);
 		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
 	}

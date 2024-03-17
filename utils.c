@@ -6,12 +6,30 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/17 16:24:20 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/17 16:51:52 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+void	syntax_error(int multpipe)
+{
+	ft_putstr_fd("Error: Argument invalid", 2);
+	if (multpipe)
+	{
+		//handle whith bonus part
+	}
+	else
+	{
+		ft_putstr_fd("prototype: ./pipex file_in cmd1 cmd2 file_out");
+	}
+	exit(EXIT_SUCCESS);
+}
+void	error(void)
+{
+	perror("Error :/");
+	exit(EXIT_FAILURE);
+}
 char	*find_path(char *command, char **envp)
 {
 	char	**paths;
