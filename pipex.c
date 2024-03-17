@@ -3,35 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/03/03 07:57:46 by lucas            ###   ########.fr       */
+/*   Updated: 2024/03/17 16:00:32 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_process(char **argv, char **envp, int fd[2])
+void	child_process(char **argv, char **envp, int *p)
 {
-	dup2(fd[1], STDOUT_FILENO); // STDOUT to pipe
-	close(fd[0]);
+	int		filein;
 
-	execve("/bin/sh", argv, envp);
-	perror("execve");
-	exit(EXIT_FAILURE);
+	filein = open_file(argv[1], 2);
+	dup2(p[WRITE_END], STDOUT_FILENO);
+	close(p[WRITE_END]);
+	dup2(filein, STDIN_FILENO);
+	close(p[READ_END]);
+	close(filein);
+	execute(argv[2], envp);
 }
 
 void	parent_process(char **argv, char **envp, int fd[2])
 {
 	dup2(fd[0], STDIN_FILENO); // STDIN to pipe
 	close(fd[1]);
-
 	execve("/bin/sh", argv, envp);
 	perror("execve");
 	exit(EXIT_FAILURE);
 }
-
 
 int	main(int argc, char **argv, char **envp)
 {
