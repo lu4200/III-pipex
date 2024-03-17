@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:36:51 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/17 16:00:27 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/17 16:19:44 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 
 /* Mandatory functions */
 void	error(void);
-char	*find_path(char *cmd, char **envp);
+char	*find_path(char *command, char **envp);
 int		get_next_line(char **line);
+void	execute(char *argv, char **envp);
 
 #endif
