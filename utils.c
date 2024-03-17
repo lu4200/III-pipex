@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/17 16:53:28 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/17 18:04:02 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	syntax_error(int multpipe)
 	}
 	else
 	{
-		ft_putstr_fd("prototype: ./pipex file_in cmd1 cmd2 file_out");
+		ft_putstr_fd("prototype: ./pipex file_in cmd1 cmd2 file_out", 2);
 	}
 	exit(EXIT_SUCCESS);
 }
@@ -64,4 +64,20 @@ void	execute(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	if (execve(find_path(cmd[0], envp), cmd, envp) == -1)
 		error();
+}
+
+int	openfd_rights(char *argv, int param)
+{
+	int	file;
+
+	file = 0;
+	if (param == 0)
+		file = open(argv, O_WRONLY | O_CREAT | O_APPEND | __O_CLOEXEC, 0777);
+	else if (param == 1)
+		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC | __O_CLOEXEC, 0777);
+	else if (param == 2)
+		file = open(argv, O_WRONLY | __O_CLOEXEC, 0777);
+	if (file == -1)
+		error();
+	return file;
 }
