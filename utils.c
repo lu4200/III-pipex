@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/17 16:51:52 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/17 16:53:28 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ void	syntax_error(int multpipe)
 	}
 	exit(EXIT_SUCCESS);
 }
+
 void	error(void)
 {
 	perror("Error :/");
 	exit(EXIT_FAILURE);
 }
+
 char	*find_path(char *command, char **envp)
 {
 	char	**paths;

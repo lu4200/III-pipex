@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:36:51 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/17 16:19:44 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/17 16:54:24 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 # define WRITE_END	1
 
 /* Mandatory functions */
-void	error(void);
-char	*find_path(char *command, char **envp);
 int		get_next_line(char **line);
+char	*find_path(char *command, char **envp);
 void	execute(char *argv, char **envp);
+void	syntax_error(int multpipe);
+void	error(void);
 
 #endif
