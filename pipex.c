@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/03/17 16:00:32 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/17 16:44:54 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ void	child_process(char **argv, char **envp, int *p)
 	execute(argv[2], envp);
 }
 
-void	parent_process(char **argv, char **envp, int fd[2])
+void	parent_process(char **argv, char **envp, int *p)
 {
-	dup2(fd[0], STDIN_FILENO); // STDIN to pipe
-	close(fd[1]);
-	execve("/bin/sh", argv, envp);
-	perror("execve");
-	exit(EXIT_FAILURE);
+	int		fileout;
+
+	fileout = open_file(argv[4], 1);
+	dup2(p[READ_END], STDIN_FILENO);
+	close(p[READ_END]);
+	dup2(fileout, STDOUT_FILENO);
+	close(p[WRITE_END]);
+	close(fileout);
+	execute(argv[3], envp);
 }
 
 int	main(int argc, char **argv, char **envp)
