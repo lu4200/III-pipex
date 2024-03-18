@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:36:51 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/17 18:02:11 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 14:53:01 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 /* Mandatory functions */
 int		get_next_line(char **line);
 void	execute(char *argv, char **envp);
-void	syntax_error(int multpipe);
+void	syntax_error(void);
 void	error(void);
 char	*find_path(char *command, char **envp);
 int	openfd_rights(char *argv, int param);

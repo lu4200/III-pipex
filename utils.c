@@ -6,23 +6,16 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/17 18:04:02 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 14:52:28 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	syntax_error(int multpipe)
+void	syntax_error(void)
 {
 	ft_putstr_fd("Error: Argument invalid", 2);
-	if (multpipe)
-	{
-		//handle whith bonus part
-	}
-	else
-	{
-		ft_putstr_fd("prototype: ./pipex file_in cmd1 cmd2 file_out", 2);
-	}
+	ft_putstr_fd("prototype: ./pipex file_in cmd1 cmd2 file_out", 2);
 	exit(EXIT_SUCCESS);
 }
 
@@ -40,10 +33,11 @@ char	*find_path(char *command, char **envp)
 	int		index;
 
 	index = 0;
-	while (ft_strnstr(envp[index], "PATH", 4) == 0)
+	while (envp[index] && strncmp(envp[index], "PATH=", 5) != 0)
 		index++;
+	if (!envp[index])
+		return (NULL);
 	paths = ft_split(envp[index] + 5, ':');
-	/*+5 to skip "PATH="*/
 	index = 0;
 	while (paths[index])
 	{
@@ -79,5 +73,5 @@ int	openfd_rights(char *argv, int param)
 		file = open(argv, O_WRONLY | __O_CLOEXEC, 0777);
 	if (file == -1)
 		error();
-	return file;
+	return (file);
 }
