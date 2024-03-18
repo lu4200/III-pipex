@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/18 17:25:27 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 18:07:36 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*find_path(char *command, char **envp)
 {
 	char	**paths;
 	char	*part_path;
+	char	*full_path;
 	int		index;
-	/*char	*path_fnl;*/
 
 	index = 0;
 	while (envp[index] && strncmp(envp[index], "PATH=", 5) != 0)
@@ -41,11 +41,12 @@ char	*find_path(char *command, char **envp)
 	index = 0;
 	while (paths[index])
 	{
-		part_path = ft_strjoin(paths[index], command);
+		part_path = ft_strjoin(paths[index], "/");
 		if (!part_path)
-			ft_free_array(paths);
-		/*path_fnl = ft_strjoin(part_path, command);
-		free(part_path);*/
+			return (ft_free_array(paths));
+		full_path = ft_strjoin(part_path, command);
+		if (!full_path)
+			return (ft_free_array(paths));
 		if (access(part_path, F_OK) == 0)
 			return (ft_free_array(paths), part_path);
 		index ++;
