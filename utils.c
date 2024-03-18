@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/18 16:49:15 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:25:27 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	error(void)
 char	*find_path(char *command, char **envp)
 {
 	char	**paths;
-	char	*path_fnl;
 	char	*part_path;
 	int		index;
+	/*char	*path_fnl;*/
 
 	index = 0;
 	while (envp[index] && strncmp(envp[index], "PATH=", 5) != 0)
@@ -44,10 +44,10 @@ char	*find_path(char *command, char **envp)
 		part_path = ft_strjoin(paths[index], command);
 		if (!part_path)
 			ft_free_array(paths);
-		path_fnl = ft_strjoin(part_path, command);
-		free(part_path);
-		if (access(path_fnl, F_OK) == 0)
-			return (ft_free_array(paths), path_fnl);
+		/*path_fnl = ft_strjoin(part_path, command);
+		free(part_path);*/
+		if (access(part_path, F_OK) == 0)
+			return (ft_free_array(paths), part_path);
 		index ++;
 	}
 	return (ft_free_array(paths), NULL);
