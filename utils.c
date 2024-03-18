@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/18 18:07:36 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 18:54:32 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,33 @@ void	error(void)
 	exit(EXIT_FAILURE);
 }
 
-char	*find_path(char *command, char **envp)
+char	*find_path(char *cmd, char **envp)
 {
 	char	**paths;
+	char	*path;
+	int		i;
 	char	*part_path;
-	char	*full_path;
-	int		index;
 
-	index = 0;
-	while (envp[index] && strncmp(envp[index], "PATH=", 5) != 0)
-		index++;
-	if (!envp[index])
-		return (NULL);
-	paths = ft_split(envp[index] + 5, ':');
-	index = 0;
-	while (paths[index])
+	i = 0;
+	while (ft_strnstr(envp[i], "PATH", 4) == 0)
+		i++;
+	paths = ft_split(envp[i] + 5, ':');
+	i = 0;
+	while (paths[i])
 	{
-		part_path = ft_strjoin(paths[index], "/");
-		if (!part_path)
-			return (ft_free_array(paths));
-		full_path = ft_strjoin(part_path, command);
-		if (!full_path)
-			return (ft_free_array(paths));
-		if (access(part_path, F_OK) == 0)
-			return (ft_free_array(paths), part_path);
-		index ++;
+		part_path = ft_strjoin(paths[i], "/");
+		path = ft_strjoin(part_path, cmd);
+		free(part_path);
+		if (access(path, F_OK) == 0)
+			return (path);
+		free(path);
+		i++;
 	}
-	return (ft_free_array(paths), NULL);
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+	free(paths);
+	return (0);
 }
 
 void	execute(char *argv, char **envp)

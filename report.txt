@@ -1,0 +1,30 @@
+findpath 0/20 !!!!!!!!!!!
+
+char	*find_path(char *command, char **envp)
+{
+	char	**paths;
+	char	*part_path;
+	char	*full_path;
+	int		index;
+
+	index = 0;
+	while (envp[index] && strncmp(envp[index], "PATH=", 5) != 0)
+		index++;
+	if (!envp[index])
+		return (NULL);
+	paths = ft_split(envp[index] + 5, ':');
+	index = 0;
+	while (paths[index])
+	{
+		part_path = ft_strjoin(paths[index], "/");
+		if (!part_path)
+			return (ft_free_array(paths));
+		full_path = ft_strjoin(part_path, command);
+		if (!full_path)
+			return (ft_free_array(paths));
+		if (access(part_path, F_OK) == 0)
+			return (ft_free_array(paths), part_path);
+		index ++;
+	}
+	return (ft_free_array(paths), NULL);
+}
