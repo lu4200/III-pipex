@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/18 15:23:11 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 16:49:15 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,42 @@ char	*find_path(char *command, char **envp)
 	while (paths[index])
 	{
 		part_path = ft_strjoin(paths[index], command);
+		if (!part_path)
+			ft_free_array(paths);
 		path_fnl = ft_strjoin(part_path, command);
 		free(part_path);
 		if (access(path_fnl, F_OK) == 0)
-			return (path_fnl);
+			return (ft_free_array(paths), path_fnl);
 		index ++;
 	}
-	return (0);
+	return (ft_free_array(paths), NULL);
 }
 
 void	execute(char *argv, char **envp)
 {
 	char	**cmd;
+	char	*path;
 
 	cmd = ft_split(argv, ' ');
-	if (execve(find_path(cmd[0], envp), cmd, envp) == -1)
+	if (!cmd)
+	{
+		ft_free_array(cmd);
 		error();
+	}
+	path = find_path(cmd[0], envp);
+	if (!path)
+	{
+		ft_free_array(cmd);
+		error();
+	}
+	if (execve(path, cmd, envp) == -1)
+	{
+		free(path);
+		ft_free_array(cmd);
+		error();
+	}
+	free(path);
+	ft_free_array(cmd);
 }
 
 int	openfd_rights(char *argv, int param)
