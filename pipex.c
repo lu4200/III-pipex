@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/03/18 14:52:40 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 15:30:47 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ void	child_process(char **argv, char **envp, int *p)
 {
 	int		filein;
 
+	if (access(argv[1], F_OK) == -1)
+	{
+		perror("File does not exist");
+		exit(EXIT_FAILURE);
+	}
+	if (access(argv[1], R_OK) == -1)
+	{
+		perror("Cannot read file");
+		exit(EXIT_FAILURE);
+	}
 	filein = openfd_rights(argv[1], 2);
 	if (filein == -1)
 		error();

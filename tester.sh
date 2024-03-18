@@ -6,7 +6,7 @@
 #    By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 15:03:02 by lumaret           #+#    #+#              #
-#    Updated: 2024/03/18 15:18:03 by lumaret          ###   ########.fr        #
+#    Updated: 2024/03/18 16:06:21 by lumaret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ echo -e "file1.txt\nfile2.txt\nfile3.txt" > input
 # Execution de la deuxieme commande avec pipex
 ./pipex input "ls -l" "grep .txt" output.txt
 
-# Execution de la commande shell équivalente et stockage du resultat dans un fichier temporaire
+# Execution de la commande shell equivalente et stockage du resultat dans un fichier temporaire
 ls -l input | grep .txt > expected_output2.txt
 
 # Comparaison des resultats

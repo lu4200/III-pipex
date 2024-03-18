@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/18 14:52:28 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 15:23:11 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	openfd_rights(char *argv, int param)
 	else if (param == 1)
 		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC | __O_CLOEXEC, 0777);
 	else if (param == 2)
-		file = open(argv, O_WRONLY | __O_CLOEXEC, 0777);
+		file = open(argv, O_RDONLY | __O_CLOEXEC, 0777);
 	if (file == -1)
 		error();
 	return (file);
