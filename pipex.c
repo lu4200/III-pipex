@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/03/18 15:30:47 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/18 17:09:29 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	parent_process(char **argv, char **envp, int *p)
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		fd[2];
-	static	int	test = 1;
-	pid_t	pid1;
+	static int	test = 1;
+	int			fd[2];
+	pid_t		pid1;
 
 	while (test < argc)
 	{
