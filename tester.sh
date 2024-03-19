@@ -13,9 +13,9 @@ cat input.txt | sort > expected_output.txt
 
 # Comparaison des resultats
 if diff -q output.txt expected_output.txt > /dev/null; then
-    echo -e "cat + sort:\033[32m[OK]\033[0m \n"
+    echo -e "cat + sort : \033[32m[OK]\033[0m \n"
 else
-    echo -e "cat + sort:\033[31m[FAIL]\033[0m \n"
+    echo -e "cat + sort : \033[31m[FAIL]\033[0m \n"
 fi
 
 rm input.txt output.txt expected_output.txt
@@ -32,9 +32,9 @@ ls -l . | grep .c > test_output2.txt
 
 # Comparaison des resultats
 if diff -q output2.txt test_output2.txt > /dev/null; then
-    echo -e "Current Directory:\033[32m[OK]\033[0m \n"
+    echo -e "Current Directory : \033[32m[OK]\033[0m \n"
 else
-    echo -e "Current Directory:\033[34m[CHECK LOGS]\033[0m \n"
+    echo -e "Current Directory : \033[34m[CHECK LOGS]\033[0m \n"
 fi
 
 rm input2.txt output2.txt test_output2.txt
@@ -51,9 +51,9 @@ grep an input3.txt | sort -r > expected_output3.txt
 
 # Comparaison des resultats
 if diff -q output3.txt expected_output3.txt > /dev/null; then
-    echo -e "grep + sort -r:\033[32m[OK]\033[0m \n"
+    echo -e "grep + sort -r : \033[32m[OK]\033[0m \n"
 else
-    echo -e "grep + sort -r:\033[31m[FAIL]\033[0m \n"
+    echo -e "grep + sort -r : \033[31m[FAIL]\033[0m \n"
 fi
 
 rm input3.txt output3.txt expected_output3.txt
@@ -63,16 +63,16 @@ rm input3.txt output3.txt expected_output3.txt
 echo -e "un mot\ndeux mots\nquatre mots ici" > input4.txt
 
 # Execution de la commande avec pipex
-./pipex input4.txt "wc -c" "sort -c" output4.txt
+./pipex input4.txt "wc" "sort -c" output4.txt
 
 # Execution de la commande avec bash
-input4.txt wc -c | sort -n > expected_output4.txt
+input4.txt wc | sort -n > expected_output4.txt
 
 # Comparaison des resultats
 if diff -q output4.txt expected_output4.txt > /dev/null; then
-    echo -e "wc -w + sort -n:\033[32m[OK]\033[0m \n"
+    echo -e "wc + sort -n : \033[32m[OK]\033[0m \n"
 else
-    echo -e "wc -w + sort -n:\033[31m[FAIL]\033[0m \n"
+    echo -e "wc + sort -n : \033[31m[FAIL]\033[0m \n"
 fi
 
 #rm input4.txt output4.txt expected_output4.txt
@@ -89,9 +89,9 @@ sed 's/ligne/texte/' input5.txt | tr a-z A-Z > expected_output5.txt
 
 # Comparaison des resultats
 if diff -q output5.txt expected_output5.txt > /dev/null; then
-    echo -e "sed + trunc:\033[32m[OK]\033[0m \n"
+    echo -e "sed + trunc : \033[32m[OK]\033[0m \n"
 else
-    echo -e "sed + trunc:\033[31m[FAIL]\033[0m \n"
+    echo -e "sed + trunc : \033[31m[FAIL]\033[0m \n"
 fi
 
 rm input5.txt output5.txt expected_output5.txt
