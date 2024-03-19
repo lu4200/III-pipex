@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:08:53 by lumaret           #+#    #+#             */
-/*   Updated: 2023/12/14 16:19:25 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:46:26 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	mem = ft_calloc(len + 1, sizeof(char));
 	if (!mem)
 		return (NULL);
-	ft_strlcpy(mem, s + start, len + 1);
+	ft_memcpy(mem, s + start, len);
+	mem[len] = '\0';
 	return (mem);
 }

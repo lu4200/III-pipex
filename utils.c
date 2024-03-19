@@ -6,79 +6,94 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/18 18:54:32 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:41:35 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	syntax_error(void)
+int	ft_strcmp(char *s1, char *s2)
 {
-	ft_putstr_fd("Error: Argument invalid", 2);
-	ft_putstr_fd("prototype: ./pipex file_in cmd1 cmd2 file_out", 2);
-	exit(EXIT_SUCCESS);
-}
-
-void	error(void)
-{
-	perror("Error :/");
-	exit(EXIT_FAILURE);
-}
-
-char	*find_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*path;
-	int		i;
-	char	*part_path;
+	size_t	i;
 
 	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
-		i++;
-	paths = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
+	if (!s1)
+		return (1);
+	while (s1[i] || s2[i])
 	{
-		part_path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(part_path, cmd);
-		free(part_path);
-		if (access(path, F_OK) == 0)
-			return (path);
-		free(path);
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
 		i++;
 	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
 	return (0);
 }
 
-void	execute(char *argv, char **envp)
+char	*my_getenv(char *name, char **env)
 {
-	char	**cmd;
+	int		i;
+	int		j;
+	char	*sub;
+
+	i = 0;
+	while (env[i])
+	{
+		j = 0;
+		while (env[i][j] && env[i][j] != '=')
+			j++;
+		sub = ft_substr(env[i], 0, j);
+		if (ft_strcmp(sub, name) == 0)
+		{
+			free(sub);
+			return (env[i] + j + 1);
+		}
+		free(sub);
+		i++;
+	}
+	return (NULL);
+}
+
+char	*get_path(char *cmd, char **env)
+{
+	int		i;
+	char	*exec;
+	char	**allpath;
+	char	*path_part;
+	char	**s_cmd;
+
+	i = -1;
+	allpath = ft_split(my_getenv("PATH", env), ':');
+	s_cmd = ft_split(cmd, ' ');
+	while (allpath[++i])
+	{
+		path_part = ft_strjoin(allpath[i], "/");
+		exec = ft_strjoin(path_part, s_cmd[0]);
+		free(path_part);
+		if (access(exec, F_OK | X_OK) == 0)
+		{
+			ft_free_array(s_cmd);
+			return (exec);
+		}
+		free(exec);
+	}
+	ft_free_array(allpath);
+	ft_free_array(s_cmd);
+	return (cmd);
+}
+
+void	execute(char *cmd, char **env)
+{
+	char	**s_cmd;
 	char	*path;
 
-	cmd = ft_split(argv, ' ');
-	if (!cmd)
+	s_cmd = ft_split(cmd, ' ');
+	path = get_path(s_cmd[0], env);
+	if (execve(path, s_cmd, env) == -1)
 	{
-		ft_free_array(cmd);
-		error();
+		ft_putstr_fd("pipex: command not found: ", 2);
+		ft_putendl_fd(s_cmd[0], 2);
+		ft_free_array(s_cmd);
+		exit(0);
 	}
-	path = find_path(cmd[0], envp);
-	if (!path)
-	{
-		ft_free_array(cmd);
-		error();
-	}
-	if (execve(path, cmd, envp) == -1)
-	{
-		free(path);
-		ft_free_array(cmd);
-		error();
-	}
-	free(path);
-	ft_free_array(cmd);
 }
 
 int	openfd_rights(char *argv, int param)

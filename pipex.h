@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:36:51 by lucas             #+#    #+#             */
-/*   Updated: 2024/03/18 18:47:46 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:36:43 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	execute(char *argv, char **envp);
 void	syntax_error(void);
 void	error(void);
 char	*find_path(char *command, char **envp);
-int	openfd_rights(char *argv, int param);
-
+int		openfd_rights(char *argv, int param);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_free_array(char **ar);
 
 

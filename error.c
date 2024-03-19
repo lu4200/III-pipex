@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 16:21:43 by lumaret           #+#    #+#             */
-/*   Updated: 2024/03/19 16:37:11 by lumaret          ###   ########.fr       */
+/*   Created: 2024/03/19 16:28:33 by lumaret           #+#    #+#             */
+/*   Updated: 2024/03/19 16:29:02 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_free_array(char **ar)
+void	syntax_error(void)
 {
-	int	i;
+	ft_putstr_fd("Error: Argument invalid", 2);
+	ft_putstr_fd("prototype: ./pipex file_in cmd1 cmd2 file_out", 2);
+	exit(EXIT_SUCCESS);
+}
 
-	i = 0;
-	if (ar)
-	{
-		while (ar[i])
-		{
-			free(ar[i]);
-			i++;
-		}
-		free(ar);
-	}
-	return (NULL);
+void	error(void)
+{
+	perror("Error :/");
+	exit(EXIT_FAILURE);
 }

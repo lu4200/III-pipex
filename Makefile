@@ -6,17 +6,17 @@
 #    By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 16:56:17 by lumaret           #+#    #+#              #
-#    Updated: 2024/03/18 18:47:44 by lumaret          ###   ########.fr        #
+#    Updated: 2024/03/19 16:40:47 by lumaret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-SRCS = pipex.c utils.c free.c
+SRCS = pipex.c utils.c free.c error.c
 OBJS = $(SRCS:.c=.o)
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fPIE -v
+CFLAGS = -Wall -Wextra -Werror -g3
 RM = rm -rf
 
 .PHONY: all clean fclean re
