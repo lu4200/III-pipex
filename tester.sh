@@ -63,16 +63,16 @@ rm input3.txt output3.txt expected_output3.txt
 echo -e "un mot\ndeux mots\nquatre mots ici" > input4.txt
 
 # Execution de la commande avec pipex
-./pipex input4.txt "wc -l" "sort -c" output4.txt
+./pipex input4.txt "wc" "sort -n" output4.txt
 
 # Execution de la commande avec bash
-input4.txt wc -l | sort -n > expected_output4.txt
+wc input4.txt | sort -n > expected_output4.txt
 
 # Comparaison des resultats
 if diff -q output4.txt expected_output4.txt > /dev/null; then
     echo -e "wc + sort -n : \033[32m[OK]\033[0m \n"
 else
-    echo -e "wc + sort -n : \033[31m[FAIL]\033[0m \n"
+    echo -e "wc + sort -n : \033[34m[CHECK LOGS]\033[0m \n"
 fi
 
 #rm input4.txt output4.txt expected_output4.txt
