@@ -2,7 +2,6 @@
 
 ####################################### CAT SORT ############################### 1
 
-
 echo -e "d\nc\na\nb" > input.txt
 
 # Execution de la commande avec pipex
@@ -19,8 +18,8 @@ else
 fi
 
 rm input.txt output.txt expected_output.txt
-################################### DIRECTORY ################################## 2
 
+################################### DIRECTORY ################################## 2
 
 echo -e "file1.txt\nfile2.txt\nfile3.txt" > input2.txt
 
@@ -38,8 +37,8 @@ else
 fi
 
 rm input2.txt output2.txt test_output2.txt
-################################ GREP SORT ##################################### 3
 
+################################ GREP SORT ##################################### 3
 
 echo -e "pomme\nbanane\nananas\nabricot" > input3.txt
 
@@ -57,8 +56,8 @@ else
 fi
 
 rm input3.txt output3.txt expected_output3.txt
-############################## WC-W SORT-N ##################################### 4
 
+############################## WC-W SORT-N ##################################### 4
 
 echo -e "un mot\ndeux mots\nquatre mots ici" > input4.txt
 
@@ -75,14 +74,14 @@ else
     echo -e "wc + sort -n : \033[34m[CHECK LOGS]\033[0m \n"
 fi
 
-#rm input4.txt output4.txt expected_output4.txt
-############################# SED TRUNC ############################################ 5
+rm input4.txt output4.txt expected_output4.txt
 
+############################# SED TRUNC ############################################ 5
 
 echo -e "Ceci est une ligne\nEt une autre ligne\nEt encore une" > input5.txt
 
 # Execution de la commande avec pipex
-./pipex input5.txt "sed 's/ligne/texte/'" "tr a-z A-Z" output5.txt
+./pipex input5.txt "sed s/ligne/texte/" "tr a-z A-Z" output5.txt
 
 # Execution de la commande avec bash
 sed 's/ligne/texte/' input5.txt | tr a-z A-Z > expected_output5.txt
@@ -94,5 +93,7 @@ else
     echo -e "sed + trunc : \033[31m[FAIL]\033[0m \n"
 fi
 
-rm input5.txt output5.txt expected_output5.txt
-######################################################################################
+#rm input5.txt output5.txt expected_output5.txt
+
+##################################################################################### 6
+
