@@ -35,5 +35,4 @@ int		openfd_rights(char *argv, int param);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_free_array(char **ar);
 
-
 #endif
