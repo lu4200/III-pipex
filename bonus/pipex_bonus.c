@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:53:39 by lumaret           #+#    #+#             */
-/*   Updated: 2024/04/09 17:02:20 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/04/09 17:52:26 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_first_proc(t_struct *s)
 	ft_close_pipes(s);
 	ft_do_cmd(s->av[2], s);
 }
+// FROM MANDATORY //
 
 void	execute(char *cmd, char **env)
 {

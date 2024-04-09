@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:01:36 by lumaret           #+#    #+#             */
-/*   Updated: 2024/04/09 17:02:04 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/04/09 17:52:49 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+// FROM MANDATORY //
 
 char	*my_getenv(char *name, char **env)
 {
