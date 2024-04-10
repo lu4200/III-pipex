@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:53:39 by lumaret           #+#    #+#             */
-/*   Updated: 2024/04/09 17:52:26 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/04/10 14:45:04 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,29 @@ void	execute(char *cmd, char **env)
 		ft_free_array(s_cmd);
 		exit(0);
 	}
+}
+
+void	ft_here_doc(t_struct *s)
+{
+	char	*tmp;
+	char	*res;
+
+	res = NULL;
+	s->flag = 1;
+	while (1)
+	{
+		write(1, "here_doc> ", 10);
+		tmp = ft_gnl();
+		if (ft_strcmp(tmp, s->av[2]) == 0)
+			break ;
+		res = ft_strjoin(res, tmp);
+		free(tmp);
+	}
+	pipe(s->here_pipe);
+	write(s->here_pipe[1], res, ft_strlen(res));
+	close(s->here_pipe[1]);
+	free(tmp);
+	free(res);
 }
 
 int	main(int ac, char **av, char **env)
