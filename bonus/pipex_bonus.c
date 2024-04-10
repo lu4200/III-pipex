@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:53:39 by lumaret           #+#    #+#             */
-/*   Updated: 2024/04/10 14:45:04 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/04/10 14:54:06 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_first_proc(t_struct *s)
 		fd = open(s->av[1], O_RDONLY);
 	if (fd == -1)
 		exit(write(1, "error: open file\n", 17));
-	dup2(fd, 0);
-	dup2(s->pipe[1], 1);
+	dup2(fd, 0);  // STDIN_FILENO
+	dup2(s->pipe[1], 1); // STDOUT_FILENO
 	close(fd);
 	ft_close_pipes(s);
 	ft_do_cmd(s->av[2], s);
