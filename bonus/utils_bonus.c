@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:01:36 by lumaret           #+#    #+#             */
-/*   Updated: 2024/04/10 17:43:43 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/04/22 14:23:42 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*get_path(char *cmd, char **env)
 	return (cmd);
 }
 
-char	*ft_gnl(void)
+char	*ft_STDINgnl(void)
 {
 	char	*res;
 	char	*buf;
