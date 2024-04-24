@@ -6,31 +6,33 @@
 #    By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 14:37:22 by lumaret           #+#    #+#              #
-#    Updated: 2024/04/22 18:21:48 by lumaret          ###   ########.fr        #
+#    Updated: 2024/04/24 17:17:43 by lumaret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	pipex
 
-SRCS	=	pipex_bonus.c \
-			ft_split.c \
-			utils_bonus.c \
-			multipipe.c \
+SRCS	=	pipex.c \
+			free.c \
+			error.c \
+			utils.c \
 
-HEADER	=	pipex_bonus.h
+LIBFTDIR =	libft/
+
+HEADER	=	pipex.h
 
 OBJS	=	$(SRCS:%.c=%.o)
 
-CC		=	gcc -g3
+CC		=	gcc -no-pie
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -fPIE
 
 .PHONY	:	all clean fclean re
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJS) $(HEADER)
-			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIBFTDIR) -lft
 
 %.o 	:	%.c $(HEADER)
 			$(CC) $(CFLAGS) -c $< -o $@
@@ -42,3 +44,6 @@ fclean	:	clean
 			@$(RM) $(NAME)
 
 re		:	fclean all
+
+libft	:
+			@make -C libft

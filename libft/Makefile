@@ -6,7 +6,7 @@
 #    By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 13:29:33 by lumaret           #+#    #+#              #
-#    Updated: 2023/12/18 16:34:15 by lumaret          ###   ########.fr        #
+#    Updated: 2024/04/24 17:17:54 by lumaret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,14 +31,14 @@ NAME	= 	libft.a
 
 CC = cc
 
-CFLAGS	= 	-Wall -Wextra -Werror
+CFLAGS	= 	-Wall -Wextra -Werror -fPIE -no-pie
 
 AR		= 	ar rc
 
 RM		= 	rm -f
 
 .c.o:
-	$(CC) $(CFLAGS) -o $(<:.c=.o) -c $<
+	$(CC) $(CFLAGS) -fPIC -o $(<:.c=.o) -c $<
 
 $(NAME):	$(OBJS)
 	$(AR) $(NAME) $(OBJS)
