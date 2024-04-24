@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/04/24 17:45:58 by lumaret          ###   ########.fr       */
+/*   Created: 2024/04/09 17:01:36 by lumaret           #+#    #+#             */
+/*   Updated: 2024/04/22 15:07:30 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../inc/pipex_bonus.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -27,6 +27,7 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+// FROM MANDATORY //
 
 char	*my_getenv(char *name, char **env)
 {
@@ -51,6 +52,7 @@ char	*my_getenv(char *name, char **env)
 	}
 	return (NULL);
 }
+
 
 char	*get_path(char *cmd, char **env)
 {
@@ -80,34 +82,20 @@ char	*get_path(char *cmd, char **env)
 	return (cmd);
 }
 
-void	execute(char *cmd, char **env)
+char	*ft_STDINgnl(void)
 {
-	char	**s_cmd;
-	char	*path;
+	char	*res;
+	char	*buf;
 
-	s_cmd = ft_split(cmd, ' ');
-	path = get_path(s_cmd[0], env);
-	if (execve(path, s_cmd, env) == -1)
+	res = NULL;
+	buf = malloc(2);
+	while (read(0, buf, 1) == 1 && buf[0] != '\0')
 	{
-		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
-		ft_free_array(s_cmd);
-		exit(1);
+		buf[1] = '\0';
+		res = ft_strjoin(res, buf);
+		if (buf[0] == '\n')
+			break ;
 	}
-}
-
-int	openfd_rights(char *argv, int param)
-{
-	int	file;
-
-	file = 0;
-	if (param == 0)
-		file = open(argv, O_WRONLY | O_CREAT | O_APPEND | __O_CLOEXEC, 0777);
-	else if (param == 1)
-		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC | __O_CLOEXEC, 0777);
-	else if (param == 2)
-		file = open(argv, O_RDONLY | __O_CLOEXEC, 0777);
-	if (file == -1)
-		error();
-	return (file);
+	free(buf);
+	return (res);
 }

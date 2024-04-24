@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:36:51 by lucas             #+#    #+#             */
-/*   Updated: 2024/04/10 14:30:41 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/04/24 17:03:19 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 /*stdio for debug df to delet*/
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
 # define READ_END	0
 # define WRITE_END	1
