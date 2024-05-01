@@ -6,7 +6,7 @@
 #    By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 14:37:22 by lumaret           #+#    #+#              #
-#    Updated: 2024/04/24 17:17:43 by lumaret          ###   ########.fr        #
+#    Updated: 2024/05/01 18:22:52 by lumaret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRCS	=	pipex.c \
 			free.c \
 			error.c \
 			utils.c \
+			ft_strstr.c \
+			exec_child.c \
 
 LIBFTDIR =	libft/
 
@@ -23,7 +25,7 @@ HEADER	=	pipex.h
 
 OBJS	=	$(SRCS:%.c=%.o)
 
-CC		=	gcc -no-pie
+CC		=	gcc -no-pie -g3
 
 CFLAGS	=	-Wall -Wextra -Werror -fPIE
 

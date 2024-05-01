@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/04/24 18:09:52 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/05/01 18:26:28 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	child_process(char **argv, char **envp, int *p)
 
 	if (access(argv[1], F_OK) == -1)
 	{
-		perror("File does not exist");
+		perror("\033[31m[FATAL]\033[0m: File does not exist");
 		exit(EXIT_FAILURE);
 	}
 	if (access(argv[1], R_OK) == -1)
 	{
-		perror("Cannot read file");
+		perror("\033[31m[FATAL]\033[0m: Cannot read file");
 		exit(EXIT_FAILURE);
 	}
 	filein = openfd_rights(argv[1], 2);
@@ -37,7 +37,7 @@ void	child_process(char **argv, char **envp, int *p)
 	execute(argv[2], envp);
 }
 
-void	parent_process(char **argv, char **envp, int *p)
+void	child_process2(char **argv, char **envp, int *p)
 {
 	int		fileout;
 
@@ -54,13 +54,12 @@ void	parent_process(char **argv, char **envp, int *p)
 
 int	main(int argc, char **argv, char **envp)
 {
-	static int	test = 1;
+	static int	test = 0;
 	int			fd[2];
-	pid_t		pid1;
 
 	while (test < argc)
 	{
-		if (!argv[test] || *argv[test] == '\0')
+		if (!argv[test] || *argv[test] == '\0' || argc == 1)
 			syntax_error();
 		test++;
 	}
@@ -68,15 +67,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (pipe(fd) == -1)
 			error();
-		pid1 = fork();
-		if (pid1 == -1)
-			error();
-		if (pid1 == 0)
-			child_process(argv, envp, fd);
-		waitpid(pid1, NULL, 0);
-		parent_process(argv, envp, fd);
+		exec_child(argv, envp, fd);
+		exec_child2(argv, envp, fd);
+		close_all(fd);
 	}
-	else
-		syntax_error();
+	while (wait(NULL) > 0)
+		;
 	return (0);
 }

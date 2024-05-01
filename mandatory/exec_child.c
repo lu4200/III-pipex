@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   exec_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/19 16:28:33 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/01 18:21:56 by lumaret          ###   ########.fr       */
+/*   Created: 2024/05/01 17:49:58 by lumaret           #+#    #+#             */
+/*   Updated: 2024/05/01 18:19:47 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	syntax_error(void)
+void	close_all(int *fd)
 {
-	ft_putstr_fd("\033[31m[ERROR]\033[0m: Argument invalid ", 2);
-	ft_putstr_fd("\nprototype: ./pipex file_in cmd1 cmd2 file_out", 2);
-	exit(EXIT_SUCCESS);
+	close(fd[0]);
+	close(fd[1]);
 }
 
-void	error(void)
+void	exec_child(char **argv, char **envp, int *fd)
 {
-	perror("\033[31m[ERROR]\033[0m");
-	exit(EXIT_FAILURE);
+	pid_t		pid1;
+
+	pid1 = fork();
+	if (pid1 == -1)
+		error();
+	if (pid1 == 0)
+		child_process(argv, envp, fd);
 }
 
-void	type_error(char *s)
+void	exec_child2(char **argv, char **envp, int *fd)
 {
-	if (s)
-		perror(s);
-	exit(EXIT_FAILURE);
+	pid_t		pid2;
+
+	pid2 = fork();
+	if (pid2 == -1)
+		error();
+	if (pid2 == 0)
+		child_process2(argv, envp, fd);
 }

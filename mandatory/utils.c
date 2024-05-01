@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/04/24 17:45:58 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/05/01 17:55:14 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,16 @@ void	execute(char *cmd, char **env)
 	path = get_path(s_cmd[0], env);
 	if (execve(path, s_cmd, env) == -1)
 	{
-		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
+		if (my_strstr(s_cmd[0], "/usr/bin/"))
+		{
+			ft_putstr_fd("\033[31m[ERROR]\033[0m: No such file or Directory:", 2);
+			ft_putendl_fd(s_cmd[0], 2);
+		}
+		else
+		{
+			ft_putstr_fd("\033[31m[ERROR]\033[0m: command not found >> ", 2);
+			ft_putendl_fd(s_cmd[0], 2);
+		}
 		ft_free_array(s_cmd);
 		exit(1);
 	}
@@ -101,10 +109,9 @@ int	openfd_rights(char *argv, int param)
 	int	file;
 
 	file = 0;
-	if (param == 0)
-		file = open(argv, O_WRONLY | O_CREAT | O_APPEND | __O_CLOEXEC, 0777);
-	else if (param == 1)
-		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC | __O_CLOEXEC, 0777);
+	if (param == 1)
+		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC
+				| O_APPEND | __O_CLOEXEC, 0777);
 	else if (param == 2)
 		file = open(argv, O_RDONLY | __O_CLOEXEC, 0777);
 	if (file == -1)
