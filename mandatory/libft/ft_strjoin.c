@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/08 16:40:07 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/14 17:46:36 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
-{
-	char	needle;
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	needle = '/';
-	if (haystack)
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*new;
+	int		sizeofnew;
+
+	if (s1 && s2)
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		sizeofnew = (ft_strlen((char *)s1) + ft_strlen((char *)s2));
+		new = malloc(sizeof(char) * sizeofnew + 1);
+		if (!new)
+			return (NULL);
+		ft_strlcpy(new, s1, ft_strlen(s1) + 1);
+		ft_strlcat(new, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+		return (new);
 	}
-	return (0);
+	return (NULL);
 }

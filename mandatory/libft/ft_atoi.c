@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/06 13:46:05 by lucas             #+#    #+#             */
+/*   Updated: 2023/12/16 19:11:36 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
+#include "libft.h"
+
+int	ft_atoi(const char *str)
 {
-	char	needle;
 	int	i;
+	int	sign;
+	int	nb;
 
 	i = 0;
-	needle = '/';
-	if (haystack)
+	sign = 1;
+	while (str[i] && ((str[i] >= 9 && str[i] <= 13)
+			|| str[i] == 0 || str[i] == 32))
+		i++;
+	if (str[i] && (str[i] == '+' || str[i] == '-'))
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
 	}
-	return (0);
+	nb = 0;
+	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	{
+		nb = nb * 10 + str[i] - '0';
+		i++;
+	}
+	return (nb * sign);
 }

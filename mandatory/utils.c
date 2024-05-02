@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:51:37 by lucas             #+#    #+#             */
-/*   Updated: 2024/05/01 17:55:14 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:11:27 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	execute(char *cmd, char **env)
 	path = get_path(s_cmd[0], env);
 	if (execve(path, s_cmd, env) == -1)
 	{
-		if (my_strstr(s_cmd[0], "/usr/bin/"))
+		if (is_slash(s_cmd[0]))
 		{
 			ft_putstr_fd("\033[31m[ERROR]\033[0m: No such file or Directory:", 2);
 			ft_putendl_fd(s_cmd[0], 2);

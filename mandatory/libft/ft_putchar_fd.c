@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/08 16:27:49 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/14 16:52:55 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
-{
-	char	needle;
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	needle = '/';
-	if (haystack)
-	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
-	}
-	return (0);
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
 }

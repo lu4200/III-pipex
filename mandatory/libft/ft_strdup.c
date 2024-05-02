@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/08 15:50:59 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/14 16:37:05 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
-{
-	char	needle;
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	needle = '/';
-	if (haystack)
+char	*ft_strdup(const char *str1)
+{
+	char	*dest;
+	int		lendest;
+	size_t	i;
+
+	lendest = ft_strlen(str1);
+	dest = malloc(sizeof(char) * lendest + 1);
+	if (!dest)
+		return (NULL);
+	if (str1 || dest)
 	{
-		while (haystack[i])
+		i = 0;
+		while (str1[i])
 		{
-			if (haystack[i] == needle)
-				return (1);
+			dest[i] = str1[i];
 			i++;
 		}
+		dest[i] = '\0';
+		return (dest);
 	}
-	return (0);
+	return (NULL);
 }

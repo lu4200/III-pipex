@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/09 10:05:01 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/14 17:10:20 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
+#include "libft.h"
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	needle;
 	int	i;
 
+	if (!s || !f)
+		return ((void) NULL);
 	i = 0;
-	needle = '/';
-	if (haystack)
+	while (s[i])
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		f((unsigned int)i, &s[i]);
+		i++;
 	}
-	return (0);
 }

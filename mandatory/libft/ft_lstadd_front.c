@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/20 14:40:31 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/15 15:48:00 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
-{
-	char	needle;
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	needle = '/';
-	if (haystack)
+void	ft_lstadd_front(t_list **alst, t_list *new)
+{
+	if (!alst || !new)
+		return ;
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		new->next = *alst;
+		*alst = new;
 	}
-	return (0);
 }

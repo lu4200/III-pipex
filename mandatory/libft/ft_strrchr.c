@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/09 10:34:41 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/15 17:04:42 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
+#include "libft.h"
+
+char	*ft_strrchr(const char *s, int c)
 {
-	char	needle;
-	int	i;
+	int		i;
+	char	*mem;
 
 	i = 0;
-	needle = '/';
-	if (haystack)
+	mem = NULL;
+	while (s[i])
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		if (s[i] == (char)c)
+			mem = (char *)&s[i];
+		i++;
 	}
-	return (0);
+	if (!s[i] && c == '\0')
+		return ((char *)&s[i]);
+	return (mem);
 }

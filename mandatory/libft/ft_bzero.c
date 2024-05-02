@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/08 15:37:36 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/14 16:29:12 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
+#include "libft.h"
+
+void	ft_bzero(void *s, size_t n)
 {
-	char	needle;
-	int	i;
+	size_t	i;
 
 	i = 0;
-	needle = '/';
-	if (haystack)
+	if (n > 0)
 	{
-		while (haystack[i])
+		while (i < n)
 		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
+			*(unsigned char *)(s + i) = '\0';
+			i ++;
 		}
 	}
-	return (0);
 }
+
+/*casting can be consider any type of memory not just char **/

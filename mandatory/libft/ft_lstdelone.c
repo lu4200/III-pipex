@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/28 15:04:40 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/15 15:49:09 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
-{
-	char	needle;
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	needle = '/';
-	if (haystack)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (! lst)
+		return ;
+	if (del)
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		del((lst)->content);
+		free(lst);
 	}
-	return (0);
 }

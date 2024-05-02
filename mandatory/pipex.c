@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:35:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/01 18:26:28 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:11:29 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	main(int argc, char **argv, char **envp)
 	static int	test = 0;
 	int			fd[2];
 
+	if (!envp[0])
+		env_error();
 	while (test < argc)
 	{
 		if (!argv[test] || *argv[test] == '\0' || argc == 1)

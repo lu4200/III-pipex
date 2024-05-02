@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:28:33 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/01 18:21:56 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/05/03 01:08:58 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ void	syntax_error(void)
 void	error(void)
 {
 	perror("\033[31m[ERROR]\033[0m");
-	exit(EXIT_FAILURE);
+	exit(1);
+}
+
+void	env_error(void)
+{
+	ft_putstr_fd("\033[31m[ERROR]\033[0m : Env unset or invalid ", 2);
+	exit(1);
 }
 
 void	type_error(char *s)

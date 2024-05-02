@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/07 18:54:03 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/18 16:22:25 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	needle;
-	int	i;
+	size_t	i;
 
 	i = 0;
-	needle = '/';
-	if (haystack)
+	if (size == 0)
+		return (ft_strlen((char *)src));
+	while (*dst != '\0' && i < size)
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		dst++;
+		i++;
 	}
-	return (0);
+	if (i == size)
+		return (i + ft_strlen(src));
+	while (*src)
+	{
+		if (i < size - 1)
+			*dst++ = *src;
+		src++;
+		i++;
+	}
+	*dst = '\0';
+	return (i + ft_strlen(src));
 }

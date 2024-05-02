@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/06 13:49:50 by lucas             #+#    #+#             */
+/*   Updated: 2023/12/14 16:35:40 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
+#include "libft.h"
+
+void	*ft_memset(void *b, int c, size_t len)
 {
-	char	needle;
-	int	i;
+	size_t	i;
 
 	i = 0;
-	needle = '/';
-	if (haystack)
+	while (i < len)
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		*(unsigned char *)(b + i) = (unsigned char)c;
+		i++;
 	}
-	return (0);
+	return (b);
 }

@@ -6,7 +6,7 @@
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:36:51 by lucas             #+#    #+#             */
-/*   Updated: 2024/05/01 18:19:53 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/05/02 21:09:11 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int		openfd_rights(char *argv, int param);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_free_array(char **ar);
 void	type_error(char *s);
-int		my_strstr(const char *haystack, const char *needle);
+int		is_slash(const char *haystack);
 void	close_all(int *fd);
 void	exec_child(char **argv, char **envp, int *fd);
 void	exec_child2(char **argv, char **envp, int *fd);
 void	child_process2(char **argv, char **envp, int *p);
 void	child_process(char **argv, char **envp, int *p);
+void	env_error(void);
 
 #endif

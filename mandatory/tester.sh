@@ -138,5 +138,7 @@ seq 100 > input_valid.txt
 echo -e "\nInvalid absolute : " ; ./pipex input_valid.txt "/usr/bin/catt" "/usr/bin/lss" output.txt ; rm input_valid.txt output.txt
 seq 100 > input_valid.txt
 echo -e "\nInvalid absolute & relatif : " ; ./pipex input_valid.txt "lsw -l" "/usr/bin/catuuu" output.txt ; rm input_valid.txt output.txt
+seq 100 > input_valid.txt
+echo -e "\nWithout env : " ; env -i ./pipex input_valid.txt "cat" "wc -l" output.txt ; rm input_valid.txt
 echo -e "\n"
 make clean > /dev/null 2>&1

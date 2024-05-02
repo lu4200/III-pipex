@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 21:18:12 by lumaret           #+#    #+#             */
-/*   Updated: 2024/05/02 21:21:17 by lumaret          ###   ########.fr       */
+/*   Created: 2023/11/09 10:19:37 by lumaret           #+#    #+#             */
+/*   Updated: 2023/12/15 17:05:38 by lumaret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_slash(const char *haystack)
-{
-	char	needle;
-	int	i;
+#include "libft.h"
 
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char	*new;
+	size_t	newlen;
+	size_t	i;
+
+	if (s == NULL || f == NULL)
+		return (NULL);
+	newlen = ft_strlen(s);
+	new = (char *)malloc(sizeof(char) * newlen + 1);
+	if (!new)
+		return (NULL);
 	i = 0;
-	needle = '/';
-	if (haystack)
+	while (s[i])
 	{
-		while (haystack[i])
-		{
-			if (haystack[i] == needle)
-				return (1);
-			i++;
-		}
+		new[i] = f(i, s[i]);
+		i++;
 	}
-	return (0);
+	new[i] = '\0';
+	return (new);
 }
