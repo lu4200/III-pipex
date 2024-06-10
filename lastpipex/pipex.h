@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:36:51 by lucas             #+#    #+#             */
-/*   Updated: 2024/05/17 15:41:08 by lumaret          ###   ########.fr       */
+/*   Updated: 2024/05/18 15:25:19 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	child_process2(char **argv, char **envp, int *p);
 void	child_process(char **argv, char **envp, int *p);
 void	env_error(void);
 char	*check_access(char **s_cmd, char *exec);
-int		is_PATH_set(char **env);
+int		is_path_set(char **env);
 void	path_error(void);
+char	*my_getenv(char *name, char **env);
 
 #endif

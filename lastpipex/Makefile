@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lumaret <lumaret@student.42.fr>            +#+  +:+       +#+         #
+#    By: lucas <lucas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 14:37:22 by lumaret           #+#    #+#              #
-#    Updated: 2024/05/17 15:16:51 by lumaret          ###   ########.fr        #
+#    Updated: 2024/05/17 20:45:45 by lucas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,5 +48,5 @@ fclean	:	clean
 
 re		:	fclean all
 
-$(LIBFT)	:
+$(LIBFT):
 			@make -C libft

@@ -133,6 +133,8 @@ echo -e "\nBoth invalid : " ; ./pipex input_non_valid "lsw -l" "grup .c" . ;
 echo -e "bad access ;]" > bad_access.txt ; chmod u-r bad_access.txt 
 echo -e "\nBad access : " ; ./pipex bad_access.txt "ls -l" "grep .c" output.txt; rm bad_access.txt output.txt
 seq 100 > input_valid.txt
-echo -e "\nInvalid command : " ; ./pipex input_valid.txt "lsw -l" "grup .c" output.txt ; rm input_valid.txt output.txt
+echo -e "\nInvalid command : " ; ./pipex input_valid.txt "lsw -l" "grup .c" output.txt ; rm input_valid.txt
+echo -e "\nENV ignored : " ; env -i ./pipex . ls cat output.txt ;
+echo -e "\n\nPATH unset : " ; env -u PATH ./pipex . ls cat output.txt ;
 echo -e "\n"
 make clean > /dev/null 2>&1
